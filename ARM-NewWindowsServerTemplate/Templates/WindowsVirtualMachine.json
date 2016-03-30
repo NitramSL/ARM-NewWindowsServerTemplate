@@ -56,6 +56,14 @@
       "defaultValue": "lrs",
       "type": "string"
     },
+    "vnAddress": {
+      "maxLength": 3,
+      "minLength": 1,
+      "minValue": 1,
+      "maxValue": 254,
+      "defaultValue": "1",
+      "type": "string"
+    },
     "adminUsername": {
       "metadata": {
         "description": "Username for the Virtual Machine."
@@ -82,9 +90,9 @@
     "virtualNetworkName": "[concat(parameters('Environment'),'-vn')]",
     "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
-    "addressPrefix": "10.1.0.0/16",
-    "subnetPrefix": "10.1.0.0/24",
-    "subnetName": "[concat(parameters('Environment'),'-sub001')]",
+    "addressPrefix": "concat('10.', parameters('vnAddress'), '.0.0/16')",
+    "subnetPrefix": "concat('10.', parameters('vnAddress'), '.0.0/24')",
+    "subnetName": "[concat(parameters('Environment'),'-sub', parameters('vnAddress'))]",
     "vhdStorageType": "[concat(parameters('vhdStorageType'),'_', parameters('vhdStorageReplicate'))]",
     "vhdStorageContainerName": "vhds",
     "vhdStorageName": "[concat(parameters('Environment'),'sa', parameters('vhdStorageType'), parameters('vhdStorageReplicate'))]",

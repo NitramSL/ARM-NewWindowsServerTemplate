@@ -16,6 +16,9 @@
     },
       "vmNumber": {
           "value": "001"
+      },
+      "vnAddress": {
+          "value": "1"
       }
   }
 }
