@@ -2,19 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "adminPassword": {
-      "metadata": {
-        "description": "Password for the Virtual Machine."
-      },
-      "type": "securestring"
-    },
-    "adminUsername": {
-      "metadata": {
-        "description": "Username for the Virtual Machine."
-      },
-      "minLength": 1,
-      "type": "string"
-    },
     "Environment": {
       "allowedValues": [
         "msdev",
@@ -43,6 +30,18 @@
       "defaultValue": "001",
       "type": "string"
     },
+    "windowsOSVersion": {
+      "allowedValues": [
+        "2008-R2-SP1",
+        "2012-Datacenter",
+        "2012-R2-Datacenter"
+      ],
+      "defaultValue": "2012-R2-Datacenter",
+      "metadata": {
+        "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version. Allowed values: 2008-R2-SP1, 2012-Datacenter, 2012-R2-Datacenter."
+      },
+      "type": "string"
+    },
     "vhdStorageType": {
       "allowedValues": [
         "standard"
@@ -57,17 +56,18 @@
       "defaultValue": "lrs",
       "type": "string"
     },
-    "windowsOSVersion": {
-      "allowedValues": [
-        "2008-R2-SP1",
-        "2012-Datacenter",
-        "2012-R2-Datacenter"
-      ],
-      "defaultValue": "2012-R2-Datacenter",
+    "adminUsername": {
       "metadata": {
-        "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version. Allowed values: 2008-R2-SP1, 2012-Datacenter, 2012-R2-Datacenter."
+        "description": "Username for the Virtual Machine."
       },
+      "minLength": 1,
       "type": "string"
+    },
+    "adminPassword": {
+      "metadata": {
+        "description": "Password for the Virtual Machine."
+      },
+      "type": "securestring"
     }
   },
   "variables": {
