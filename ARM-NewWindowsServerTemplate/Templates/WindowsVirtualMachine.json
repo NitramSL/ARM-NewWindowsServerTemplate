@@ -31,11 +31,6 @@
       "minLength": 1,
       "type": "string"
     },
-    "dnsNameForPublicIP": {
-      "maxLength": 15,
-      "minLength": 1,
-      "type": "string"
-    },
     "vmRole": {
       "allowedValues": [
         "app",
@@ -106,7 +101,7 @@
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsNameForPublicIP')]"
+          "domainNameLabel": "[variables('vmName')]"
         }
       }
     },

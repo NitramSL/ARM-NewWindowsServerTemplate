@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
   "parameters": {
     "vmName": {
-      "value": "msdev-vmwweb002"
+      "value": "msdev-vmwweb003"
     },
     "adminUsername": {
       "value": "makor"
@@ -13,9 +13,6 @@
     },
     "Environment": {
       "value": "msdev"
-    },
-    "dnsNameForPublicIP": {
-      "value": "msdev-vmwweb002"
     },
     "vmRole": {
       "value": "web"
