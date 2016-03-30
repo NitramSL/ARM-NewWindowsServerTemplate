@@ -26,11 +26,6 @@
       "defaultValue": "msdev",
       "type": "string"
     },
-    "vmName": {
-      "maxLength": 15,
-      "minLength": 1,
-      "type": "string"
-    },
     "vmRole": {
       "allowedValues": [
         "app",
@@ -40,6 +35,26 @@
         "web"
       ],
       "defaultValue": "app",
+      "type": "string"
+    },
+    "vmNumber": {
+      "maxLength": 3,
+      "minLength": 3,
+      "defaultValue": "001",
+      "type": "string"
+    },
+    "vhdStorageType": {
+      "allowedValues": [
+        "standard"
+      ],
+      "defaultValue": "standard",
+      "type": "string"
+    },
+    "vhdStorageReplicate": {
+      "allowedValues": [
+        "lrs"
+      ],
+      "defaultValue": "lrs",
       "type": "string"
     },
     "windowsOSVersion": {
@@ -56,7 +71,7 @@
     }
   },
   "variables": {
-    "vmName": "[parameters('vmName')]",
+    "vmName": "[concat(parameters('Environment'),'-vmw', parameters('vmRole'), parameters('vmNumber'))]",
     "vmSize": "Standard_A1",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
@@ -64,19 +79,19 @@
     "nicName": "[concat(variables('vmName'),'-nic')]",
     "publicIPAddressName": "[concat(variables('vmName'),'-pip')]",
     "publicIPAddressType": "Dynamic",
-    "virtualNetworkName": "msdev-vn",
+    "virtualNetworkName": "[concat(parameters('Environment'),'-vn')]",
     "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
     "addressPrefix": "10.1.0.0/16",
-    "subnetName": "msdev-sub001",
     "subnetPrefix": "10.1.0.0/24",
-    "vhdStorageType": "Standard_LRS",
+    "subnetName": "[concat(parameters('Environment'),'-sub001')]",
+    "vhdStorageType": "[concat(parameters('vhdStorageType'),'_', parameters('vhdStorageReplicate'))]",
     "vhdStorageContainerName": "vhds",
-    "vhdStorageName": "msdevsatemplate",
+    "vhdStorageName": "[concat(parameters('Environment'),'sa', parameters('vhdStorageType'), parameters('vhdStorageReplicate'))]",
     "diagnosticsStorageAccountName": "[variables('vhdStorageName')]",
     "diagnosticsStorageAccountResourceGroup": "[resourcegroup().name]",
-    "accountid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', variables('diagnosticsStorageAccountResourceGroup'), '/providers/', 'Microsoft.Storage/storageAccounts/', variables('diagnosticsStorageAccountName'))]",
-    },
+    "accountid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', variables('diagnosticsStorageAccountResourceGroup'), '/providers/', 'Microsoft.Storage/storageAccounts/', variables('diagnosticsStorageAccountName'))]"
+  },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
