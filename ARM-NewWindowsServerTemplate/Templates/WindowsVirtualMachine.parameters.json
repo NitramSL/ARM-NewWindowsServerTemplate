@@ -3,16 +3,22 @@
     "contentVersion": "1.0.0.0",
   "parameters": {
     "vmName": {
-      "value": "msdev-vmwapp001"
+      "value": "msdev-vmwweb002"
     },
     "adminUsername": {
       "value": "makor"
     },
-    "dnsNameForPublicIP": {
-      "value": "msdev-vmwapp001"
+    "adminPassword": {
+      "value": "D!sc!pl3"
     },
-      "adminPassword": {
-          "value": "D!sc!pl3"
-      }
+    "Environment": {
+      "value": "msdev"
+    },
+    "dnsNameForPublicIP": {
+      "value": "msdev-vmwweb002"
+    },
+    "vmRole": {
+      "value": "web"
+    }
   }
 }
